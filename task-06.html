@@ -1,0 +1,54 @@
+<div id="controls">
+  <input type="number" min="1" max="100" step="1" />
+  <button type="button" data-create>Create</button>
+  <button type="button" data-destroy>Destroy</button>
+</div>
+
+<div id="boxes"></div>
+
+<script>
+  function getRandomHexColor() {
+    return `#${Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, "0")}`;
+  }
+
+  function createBoxes(amount) {
+    const boxesContainer = document.querySelector("#boxes");
+
+    for (let i = 0; i < amount; i++) {
+      const size = 30 + i * 10;
+      const box = document.createElement("div");
+      box.style.backgroundColor = getRandomHexColor();
+      box.style.width = `${size}px`;
+      box.style.height = `${size}px`;
+      boxesContainer.appendChild(box);
+    }
+
+    clearInput();
+  }
+
+  function clearBoxes() {
+    document.querySelector("#boxes").innerHTML = "";
+  }
+
+  function clearInput() {
+    document.querySelector("#controls input[type='number']").value = "";
+  }
+
+  document
+    .querySelector("#controls button[data-create]")
+    .addEventListener("click", function () {
+      const number = document.querySelector("#controls input[type='number']");
+      if (parseInt(number.value) >= 1 && parseInt(number.value) <= 100) {
+        clearBoxes();
+        createBoxes(parseInt(number.value));
+      }
+    });
+
+  document
+    .querySelector("#controls button[data-destroy]")
+    .addEventListener("click", function () {
+      clearBoxes();
+    });
+</script>
