@@ -5,7 +5,7 @@ function getRandomHexColor() {
 }
 
 function createBoxes(amount) {
-    const boxesContainer = document.querySelector("#boxes");
+    const fragment = document.createDocumentFragment();
 
     for (let i = 0; i < amount; i++) {
         const size = 30 + i * 10;
@@ -13,9 +13,10 @@ function createBoxes(amount) {
         box.style.backgroundColor = getRandomHexColor();
         box.style.width = `${size}px`;
         box.style.height = `${size}px`;
-        boxesContainer.appendChild(box);
+        fragment.appendChild(box);
     }
 
+    document.querySelector("#boxes").appendChild(fragment);
     clearInput();
 }
 
